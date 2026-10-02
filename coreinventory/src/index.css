@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body, #root { height: 100%; }
+  body {
+    background: #181a1d;
+    color: #bfc3cc;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', 'PT Serif', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: #1f2227; }
+  ::-webkit-scrollbar-thumb { background: #2e333d; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #9c8060; }
+  select option { background: #252930; color: #bfc3cc; }
+}
+
+@layer components {
+
+  /* ── Buttons ────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-accent text-bg font-semibold
+           rounded-lg px-4 py-2 text-sm cursor-pointer transition-all duration-200
+           hover:bg-accentLt active:scale-[0.97];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 bg-transparent text-dim border border-border
+           rounded-lg px-4 py-2 text-sm cursor-pointer transition-all duration-150
+           hover:border-accent hover:text-accentLt;
+  }
+  .btn-danger {
+    @apply inline-flex items-center gap-2 bg-transparent text-danger border border-danger/40
+           rounded-lg px-4 py-2 text-sm cursor-pointer transition-all duration-150
+           hover:bg-danger/10;
+  }
+
+  /* ── Form fields ────────────────────────────── */
+  .input-field {
+    @apply w-full bg-bg border border-border text-text rounded-lg px-3.5 py-2.5
+           text-sm outline-none placeholder:text-muted font-sans
+           transition-all duration-150;
+  }
+  .input-field:focus { @apply border-accent ring-1 ring-accent/15; }
+
+  .select-field {
+    @apply bg-bg border border-border text-text rounded-lg px-3.5 py-2.5
+           text-sm outline-none font-sans cursor-pointer
+           transition-all duration-150;
+  }
+  .select-field:focus { @apply border-accent; }
+
+  /* ── Layout ─────────────────────────────────── */
+  .card        { @apply bg-card rounded-xl border border-border; }
+  .kpi-card    { @apply bg-gradient-to-br from-card to-surface border border-border rounded-xl p-5
+                        transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30; }
+  .page-header { @apply flex items-center justify-between mb-6; }
+  .page-title  { @apply font-serif font-semibold text-2xl text-textLt tracking-tight; }
+  .page-sub    { @apply text-sm text-dim mt-0.5; }
+  .label       { @apply block text-xs font-mono text-muted uppercase tracking-wider mb-1.5; }
+
+  /* ── Table ──────────────────────────────────── */
+  .table-th  { @apply px-5 py-3 text-xs font-mono text-muted uppercase tracking-wider text-left whitespace-nowrap; }
+  .table-td  { @apply px-5 py-3.5 border-b border-border/40; }
+  .table-row { @apply transition-colors duration-100 hover:bg-surface/60; }
+
+  /* ── Sidebar nav ────────────────────────────── */
+  .snav {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer text-sm
+           font-medium text-dim transition-all duration-150 border-l-2 border-transparent
+           hover:bg-card hover:text-accentLt;
+  }
+  .snav.active { @apply bg-card text-accentLt border-l-accent; }
+
+  /* ── Modal ──────────────────────────────────── */
+  .modal-back { @apply fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-[2px]; }
+  .modal-box  { @apply bg-surface border border-border rounded-2xl p-7 w-full max-w-lg
+                       max-h-[90vh] overflow-y-auto animate-slide-up flex flex-col; }
+  .modal-content { @apply flex-1 overflow-y-auto; }
+
+  /* ── Badges ─────────────────────────────────── */
+  .badge          { @apply inline-block font-mono text-xs px-2 py-0.5 rounded font-medium; }
+  .badge-draft    { @apply bg-surface text-muted border border-border; }
+  .badge-waiting  { @apply bg-info/10   text-info   border border-info/20; }
+  .badge-ready    { @apply bg-success/10 text-success border border-success/20; }
+  .badge-done     { @apply bg-success/5  text-success/60 border border-success/10; }
+  .badge-canceled { @apply bg-danger/10  text-danger  border border-danger/20; }
+  .badge-ok       { @apply bg-success/10 text-success border border-success/20; }
+  .badge-low      { @apply bg-warning/10 text-warning border border-warning/20; }
+  .badge-out      { @apply bg-danger/10  text-danger  border border-danger/20; }
+
+  /* ── Auth ───────────────────────────────────── */
+  .auth-wrap {
+    @apply min-h-screen bg-bg flex overflow-auto;
+  }
+  .auth-panel {
+    @apply bg-surface border border-border rounded-2xl p-8 w-full max-w-md
+           shadow-2xl shadow-black/50 animate-slide-up;
+  }
+  .auth-input {
+    @apply w-full bg-bg border border-border text-text rounded-lg px-4 py-3 text-sm
+           outline-none placeholder:text-muted font-sans transition-all duration-150;
+  }
+  .auth-input:focus { @apply border-accent ring-1 ring-accent/15; }
+  .auth-select {
+    @apply w-full bg-bg border border-border text-text rounded-lg px-4 py-3 text-sm
+           outline-none font-sans cursor-pointer transition-all duration-150;
+  }
+  .auth-select:focus { @apply border-accent; }
+  .auth-btn {
+    @apply w-full bg-accent text-bg font-semibold rounded-lg py-3 text-sm
+           cursor-pointer transition-all duration-200 font-sans tracking-wide
+           hover:bg-accentLt active:scale-[0.98];
+  }
+  .auth-link {
+    @apply text-accentLt hover:text-accent cursor-pointer underline
+           underline-offset-2 transition-colors duration-150 text-sm;
+  }
+
+  /* ── OTP input ──────────────────────────────── */
+  .otp-input {
+    @apply w-11 h-14 bg-bg border-2 border-border rounded-xl text-center text-lg
+           font-mono text-textLt outline-none transition-all duration-150;
+  }
+  .otp-input:focus { @apply border-accent ring-2 ring-accent/15; }
+}
